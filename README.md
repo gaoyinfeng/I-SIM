@@ -10,7 +10,8 @@ To validate that the dynamic bicycle model and the PID controllers we use in the
 
 **Right**: PID controllers validation. To test the PID controllers, we made an extreme situation, i.e. using the maximum speed target as the PID controllers input, and see whether the PID can keep the vehicle in its tracks. We show some typical difficult cases, where a large vehicle drives on a continuously curved route, and a regular vehicle drives to finish a U-turn. The results are good enough to prove the rationality of PID controllers.
 
-<img width="45%" src="https://github.com/gaoyinfeng/I-SIM/blob/main/pics/Bicycle Model Validation.gif"> <img width="45%" src="https://github.com/gaoyinfeng/I-SIM/blob/main/pics/PID Controllers Validation.gif">
+<img width="45%" src="https://github.com/gaoyinfeng/I-SIM/blob/main/pics/Bicycle Model Validation.gif", align="left"> 
+<img width="45%" src="https://github.com/gaoyinfeng/I-SIM/blob/main/pics/PID Controllers Validation.gif", align="right">
 
 
 ## Acknowledgement
