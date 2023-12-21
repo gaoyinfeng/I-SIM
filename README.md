@@ -1,7 +1,7 @@
 # I-SIM
 A simulator that is built upon the INTERACTION Dataset. We will release it as soon as we finish reorganizing and cleaning the codes. An early version is provided in our previous work, [TrajGen][website_trajgen].
 
-[website_trajgen]:(https://github.com/gaoyinfeng/TrajGen/)
+[website_trajgen]: https://github.com/gaoyinfeng/TrajGen/
 
 ## Kinematic Model Validation
 To validate that the dynamic bicycle model and the PID controllers we use in the simulator are enough for simulating vehicles' motions and controlling vehicles given high-level speed control, we conducted several tests. 
