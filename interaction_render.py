@@ -49,6 +49,8 @@ class InteractionRender:
         # use for vehicle id visualization
         self._text_dict = dict()
 
+        self._settings = settings
+
     def reset(self, laneletmap, road_centerline_list):
         # clear
         self._grid_axes.clear()
@@ -92,7 +94,7 @@ class InteractionRender:
         
         draw_controlled_vehicles(self._ego_state_dict, self._ego_polygon_dict, self._ego_patches_dict, self._text_dict, self._grid_axes, self._vector_axes)
         draw_controlled_vehicles(self._react_vdi_state_dict, self._react_vdi_polygon_dict, self._react_vdi_patches_dict, self._text_dict, self._grid_axes, self._vector_axes, surrounding_vehicle_id_list)
-        draw_uncontrolled_vehicle(self._record_vdi_state_dict, self._record_vdi_polygon_dict, self._record_vdi_patches_dict, self._text_dict, self._grid_axes, self._vector_axes, surrounding_vehicle_id_list)
+        draw_uncontrolled_vehicle(self._record_vdi_state_dict, self._record_vdi_polygon_dict, self._record_vdi_patches_dict, self._text_dict, self._grid_axes, self._vector_axes, surrounding_vehicle_id_list, self._settings)
         if ghost_vis:
             draw_ghost_vehicle(self._ghost_state_dict, self._ghost_polygon_dict, self._ghost_patches_dict, self._text_dict, self._grid_axes, render_as_ego = False)
 
