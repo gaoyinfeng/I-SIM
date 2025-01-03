@@ -192,10 +192,7 @@ class Small_scale_dataset_loader():
         elif vdi_type == 'record' and route_type == 'ground_truth':
             track_file_path = os.path.join(self._gt_tracks_dir, "vehicle_tracks_" + str(self._gt_csv_index).zfill(3) + ".csv")
             track_dict = read_tracks(track_file_path)
-        
-        print("vdi_type",vdi_type)
-        print("route_type",route_type)
-        print("in read_track_file_def, track_file_path: ", track_file_path) 
+
         return track_dict
 
     def select_ego(self):
