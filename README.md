@@ -1,5 +1,5 @@
 # I-SIM
-A simulator that is built upon the INTERACTION Dataset. We plan to release it as soon as we finish reorganizing and cleaning the codes. An early version is provided in our previous work, [TrajGen][website_trajgen].
+A simulator that is built upon the INTERACTION Dataset. An early version is provided in our previous work, [TrajGen][website_trajgen].
 
 [website_trajgen]: https://github.com/gaoyinfeng/TrajGen/
 
@@ -13,10 +13,10 @@ To validate that the dynamic bicycle model and the PID controllers we use in the
 <img width="45%" src="https://github.com/gaoyinfeng/I-SIM/blob/main/pics/Bicycle Model Validation.gif"> <img width="45%" src="https://github.com/gaoyinfeng/I-SIM/blob/main/pics/PID Controllers Validation.gif">
 
 
-
 ## Manual Instructions
 
 To properly run I-ISM on your system, you should clone this repository, and follow the instruction below to install the dependencies for I-SIM.
+
 
 ### Dependencies for I-SIM simulator
 
@@ -49,6 +49,7 @@ cd interaction_gym/
 export DISPLAY=:0
 ```
 
+
 ## Usage
 
 ### Qucik Start
@@ -60,7 +61,6 @@ docker exec -it isim57 bash
 cd interaction_gym/
 python interaction_env.py --port=5557
 ```
-
 
 
 ## Acknowledgement
