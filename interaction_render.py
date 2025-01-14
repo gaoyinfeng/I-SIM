@@ -10,12 +10,12 @@ except:
 
 import matplotlib
 try:
-    matplotlib.use('TkAgg')  # 优先使用 TkAgg
+    matplotlib.use('TkAgg')
 except ImportError:
     try:
-        matplotlib.use('Qt5Agg')  # 尝试 Qt5Agg
+        matplotlib.use('Qt5Agg')
     except ImportError:
-        matplotlib.use('Agg')  # 降级到 Agg
+        matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from utils.render_tools import *
@@ -25,7 +25,7 @@ class InteractionRender:
         
         # create figures
         self._fig, self._axes = plt.subplots(1, 2, facecolor = 'lightgray', figsize=(15, 5)) # figure backcolor (figure size > map render size)
-        # 尝试设置窗口标题
+        
         try:
             if hasattr(self._fig.canvas, 'manager') and self._fig.canvas.manager:
                 self._fig.canvas.manager.set_window_title("I-SIM Visualization " + str(settings['port']))
