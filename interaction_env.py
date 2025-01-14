@@ -27,7 +27,7 @@ from observation import Observation
 
 class InteractionEnv:
     def __init__(self, settings):
-        if settings['max_steps'] is 'None':
+        if settings['max_steps'] == 'None':
             settings['max_steps'] = None
 
         # settings
@@ -201,7 +201,7 @@ class InteractionEnv:
         self._stepnum = 0
         self._total_stepnum = (self._scenario_end_time - self._scenario_start_time) / self._delta_time
 
-        controlled_state_dict = dict(ego_state_dict.items() + react_vdi_state_dict.items())
+        controlled_state_dict = {**ego_state_dict, **react_vdi_state_dict}
         self._map.update_param(self._current_time, controlled_state_dict, ghost_vis=self._ghost_visualization)
         
         # reset/clear observation and get initial observation
@@ -218,9 +218,9 @@ class InteractionEnv:
             surrounding_vehicle_id_list = self._observation.get_surrounding_vehicle_id(self.observation_dict)
             self._render.render_vehicles(surrounding_vehicle_id_list, self._ghost_visualization)
             if self._route_visualization:
-                static_route_dict = self._ego_route_dict # dict(self._ego_route_dict.items() + self._react_vdi_route_dict.items())
+                static_route_dict = {**self._ego_route_dict, **self._react_vdi_route_dict}
                 self._render.render_static_route(static_route_dict, axes_type='grid')
-                future_route_dict = self.ego_future_route_points_dict # dict(self.ego_future_route_points_dict.items() + self.react_vdi_future_route_points_dict.items())
+                future_route_dict = {**self.ego_future_route_points_dict, **self.react_vdi_future_route_points_dict}
                 self._render.render_future_route(future_route_dict, axes_type='grid')
             if self._route_bound_visualization:
                 self._render.render_route_bound(self._observation.ego_route_left_bound_points, self._observation.ego_route_right_bound_points)
@@ -291,7 +291,7 @@ class InteractionEnv:
                 react_vdi_state_dict[react_vdi_id] = react_vdi_state
 
         # update vehicls' states (if visualize ghost ego, then update its state too)
-        controlled_state_dict = dict(ego_state_dict.items() + react_vdi_state_dict.items())
+        controlled_state_dict = {**ego_state_dict, **react_vdi_state_dict}
         self._map.update_param(self._current_time, controlled_state_dict, ghost_vis=self._ghost_visualization)
 
         # get new observation, calculate rewards and results
@@ -841,10 +841,10 @@ class SeverInterface:
                     condensed_observation_dict = copy.deepcopy(observation_dict)
                     condensed_observation_dict = self.pop_useless_item(condensed_observation_dict)
                     reset_message = {'observation': condensed_observation_dict, 'reward': 0, 'done': False}
-                    self.socket.send_string(str(reset_message).encode()) # 
+                    self.socket.send_string(str(reset_message)) # 
                 else: 
                     self.scen_init_flag = False
-                    self.socket.send_string(str(self.reset_flag).encode())
+                    self.socket.send_string(str(self.reset_flag))
 
             # step
             elif message['command'] == 'step': 
@@ -868,7 +868,7 @@ class SeverInterface:
                                     'reward': reward_dict, 
                                     'done': done_dict, 
                                     'aux_info': aux_info_dict}
-                    self.socket.send_string(str(step_message).encode())
+                    self.socket.send_string(str(step_message))
 
             else:
                 print('env_init:', self.env_init_flag)

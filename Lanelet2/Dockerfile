@@ -1,7 +1,7 @@
-ARG DISTRIBUTION=18.04
+ARG DISTRIBUTION=20.04
 FROM ubuntu:${DISTRIBUTION} AS lanelet2_deps
 
-ARG ROS_DISTRO=melodic
+ARG ROS_DISTRO=noetic
 ARG ROS=ros
 SHELL ["/bin/bash", "-c"]
 
@@ -55,16 +55,20 @@ RUN if [ "${ROS_DISTRO}" = "melodic" ] || [ "${ROS_DISTRO}" = "kinetic" ]; \
         ${PY_VERSION}-rospkg \
         ros-$ROS_DISTRO-ros-environment \
         ${PY_VERSION}-tk \
+        python-tk \
+        python3-tk \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install pip dependencies
-RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py -O get-pip.py && \
-    python get-pip.py && \
-    pip install --upgrade pip && \
-    pip install matplotlib && \
-    pip install gym && \
-    pip install shapely && \
-    pip install pyzmq
+# install python dependencies   
+RUN wget https://bootstrap.pypa.io/get-pip.py -O get-pip.py && \
+    python3 get-pip.py && \
+    pip3 install --upgrade pip && \
+    pip3 install matplotlib && \
+    pip3 install gym && \
+    pip3 install shapely && \
+    pip3 install pyzmq && \
+    pip3 install numpy && \
+    pip3 install zmq
 
 RUN echo "Cleaning-up"
 RUN apt-get autoremove && \
@@ -87,7 +91,6 @@ RUN useradd --create-home --groups sudo --shell /bin/bash developer \
     && mkdir -p /etc/sudoers.d \
     && echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer \
     && chmod 0440 /etc/sudoers.d/developer
-
 
 # environment, dependencies and entry points
 USER developer

@@ -8,6 +8,14 @@ except:
              "see https://github.com/fzi-forschungszentrum-informatik/Lanelet2 for details."
     warnings.warn(string)
 
+import matplotlib
+try:
+    matplotlib.use('TkAgg')  # 优先使用 TkAgg
+except ImportError:
+    try:
+        matplotlib.use('Qt5Agg')  # 尝试 Qt5Agg
+    except ImportError:
+        matplotlib.use('Agg')  # 降级到 Agg
 import matplotlib.pyplot as plt
 
 from utils.render_tools import *
@@ -17,7 +25,14 @@ class InteractionRender:
         
         # create figures
         self._fig, self._axes = plt.subplots(1, 2, facecolor = 'lightgray', figsize=(15, 5)) # figure backcolor (figure size > map render size)
-        self._fig.canvas.set_window_title("I-SIM Visualization " + str(settings['port']))
+        # 尝试设置窗口标题
+        try:
+            if hasattr(self._fig.canvas, 'manager') and self._fig.canvas.manager:
+                self._fig.canvas.manager.set_window_title("I-SIM Visualization " + str(settings['port']))
+            elif hasattr(self._fig.canvas, 'set_window_title'):
+                self._fig.canvas.set_window_title("I-SIM Visualization " + str(settings['port']))
+        except AttributeError:
+            print("Warning: Could not set window title - using headless mode")
 
         self._grid_axes = self._axes[0]
         self._vector_axes = self._axes[1]
