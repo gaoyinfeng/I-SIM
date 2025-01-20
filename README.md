@@ -54,7 +54,7 @@ export DISPLAY=:0
 
 ### Qucik Start
 
-To train or test PIWM, your have to run I-SIM manually, we assume that I-SIM runs at port 5557 inside a docker container:
+To train or test your agent, you have to run I-SIM manually, we assume that I-SIM runs at port 5557 inside a docker container:
 
 ```shell
 docker exec -it isim57 bash
